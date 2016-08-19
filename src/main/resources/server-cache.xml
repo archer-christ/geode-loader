@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cache xmlns="http://schema.pivotal.io/gemfire/cache"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://schema.pivotal.io/gemfire/cache http://schema.pivotal.io/gemfire/cache/cache-8.1.xsd"
+       version="8.1">
+
+    <disk-store name="region-diskStore"
+                auto-compact="true"
+                compaction-threshold="50"
+                max-oplog-size="200"
+                time-interval="15"
+                allow-force-compaction="true"
+                disk-usage-warning-percentage="80"
+                disk-usage-critical-percentage="90">
+        <disk-dirs>
+            <disk-dir dir-size="1024">/Users/smanvi/temp/data</disk-dir>
+        </disk-dirs>
+    </disk-store>
+
+    <region name="Customer">
+
+            <!--refid="PARTITION_REDUNDANT_PERSISTENT_OVERFLOW">-->
+        <region-attributes
+                data-policy="persistent-partition"
+                disk-store-name="region-diskStore"
+                disk-synchronous="true"
+                enable-subscription-conflation="true"
+                statistics-enabled="true">
+            <partition-attributes
+                    redundant-copies="2"
+                    recovery-delay="24000"/>
+            <eviction-attributes>
+                <lru-heap-percentage action="overflow-to-disk"/>
+            </eviction-attributes>
+
+        </region-attributes>
+    </region>
+
+    <resource-manager critical-heap-percentage="95" eviction-heap-percentage="80"/>
+</cache>
