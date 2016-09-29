@@ -11,18 +11,18 @@
     <dependencies>
 
         <!--Geode Dependency-->
-        <dependency>
-            <groupId>org.apache.geode</groupId>
-            <artifactId>geode-core</artifactId>
-            <version>1.0.0-incubating.M2</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.apache.geode</groupId>-->
+            <!--<artifactId>geode-core</artifactId>-->
+            <!--<version>1.0.0-incubating.M2</version>-->
+        <!--</dependency>-->
 
         <!--Gemfire Dependency-->
-        <!--<dependency>-->
-            <!--<groupId>com.gemstone.gemfire</groupId>-->
-            <!--<artifactId>gemfire</artifactId>-->
-            <!--<version>8.2.1</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>com.gemstone.gemfire</groupId>
+            <artifactId>gemfire</artifactId>
+            <version>8.2.1</version>
+        </dependency>
 
         <dependency>
             <groupId>log4j</groupId>
