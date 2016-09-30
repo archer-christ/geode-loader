@@ -13,8 +13,8 @@ public class CommandHandler {
     static Logger logger = Logger.getLogger(CommandHolder.class.getSimpleName());
 
     ExecutorService handlerService = Executors.newSingleThreadExecutor();
-    public void start() {
 
+    public void start() {
         handlerService.submit(new Runnable() {
             public void run() {
                 CreateHandler createHandler = new CreateHandler();
@@ -27,6 +27,7 @@ public class CommandHandler {
                     try {
                         commandHolder = Common.commandQueue.take();
                         command = commandHolder.getCommand();
+                        logger.info("Received Command : "+command);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

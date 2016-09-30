@@ -18,11 +18,12 @@ import java.util.concurrent.Executors;
 public class CreateHandler {
     static Logger logger = Logger.getLogger(CreateHandler.class.getSimpleName());
 
-    private static final int BATCH_PERCENTAGE = 5;
+    private static final int BATCH_SIZE = 20;
     ExecutorService createThreadPool = Executors.newCachedThreadPool();
 
 
     public void handle(CommandHolder holder) {
+        //Submit to a pool as we want to handle multiple create commands in parallel
         createThreadPool.submit(new CreateCommandRunner(holder));
     }
 
@@ -50,13 +51,12 @@ public class CreateHandler {
                 ClientCache clientCache = new ClientCacheFactory().set("cache-xml-file", "client-cache.xml").create();
                 Region<Long, byte[]> region = clientCache.getRegion(regionName);
                 if (size.endsWith("MB")) {
-                    int mbs = Integer.parseInt(size.split("MB")[0]);
-                    int batchSize = mbs * (BATCH_PERCENTAGE / 100);
-                    Map<Long, byte[]> batchMap = new HashMap<Long, byte[]>(batchSize);
+                    double mbs = Double.parseDouble(size.split("MB")[0]);
+                    Map<Long, byte[]> batchMap = new HashMap<Long, byte[]>(BATCH_SIZE);
 
-                    for (int j = 1; j < mbs - 1; j++) {
-                        batchMap.put(Common.getRandomLong(), new byte[Common.MB]);
-                        if (j % batchSize == 0) {
+                    for (long j = 1; j < mbs - 1; j++) {
+                        batchMap.put(j, new byte[Common.MB]);
+                        if (j % BATCH_SIZE == 0) {
                             region.putAll(batchMap);
                             batchMap.clear();
                             logger.info("Inserted "+j+" Entries for command <"+command+"> ...");

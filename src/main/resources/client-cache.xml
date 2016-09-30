@@ -5,7 +5,7 @@
 <client-cache>
     <pool name="myPool">
         <!--<locator host="localhost" port="10334"/>-->
-        <locator host="localhost" port="9999"/>
+        <locator host="localhost" port="11111"/>
     </pool>
 
     <region name="Customer" refid="PROXY"/>

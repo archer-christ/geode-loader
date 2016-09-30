@@ -17,9 +17,9 @@
         <!--</disk-dirs>-->
     <!--</disk-store>-->
 
-    <region name="Customer">
+    <region name="Customer" refid="PARTITION">
 
     </region>
 
-    <resource-manager critical-heap-percentage="95" eviction-heap-percentage="80"/>
+    <!--<resource-manager critical-heap-percentage="95" eviction-heap-percentage="80"/>-->
 </cache>
