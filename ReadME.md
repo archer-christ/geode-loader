@@ -14,5 +14,5 @@ Available Commands  :
 ```
 ```
 Please enter a command to execute $>
-create 1024MB /Customer
+create 1024MB Customer
 ```
